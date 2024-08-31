@@ -20,6 +20,9 @@ Follow these steps to get the project up and running on your local machine.
 git clone https://github.com/MohammedAnas19/PlacesApp
 cd PlacesApp
 
+# Create a .env file from the .env.example and update the api key
+cp .env.example .env
+
 # Install dependencies using npm or yarn
 npm install
 
