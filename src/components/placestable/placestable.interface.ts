@@ -7,7 +7,7 @@ export interface PlaceType {
   country: string;
   countryCode: string;
   region: string;
-  regionWdId:string;
+  regionWdId: string;
   regionCode: string;
   latitude: number;
   longitude: number;
@@ -17,4 +17,5 @@ export interface PlaceType {
 export interface PlacesTablePropsType {
   places: Array<PlaceType>;
   isLoading?: boolean;
+  query?: string;
 }

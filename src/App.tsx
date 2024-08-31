@@ -14,7 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [limit, setLimit] = useState(3);
+  const [limit, setLimit] = useState(5);
 
   const searchPlaces = useCallback(
     async (query: string, limit: number, currentPage: number) => {
@@ -33,8 +33,16 @@ function App() {
   );
 
   useEffect(() => {
-    searchPlaces(query, limit, currentPage);
+    if (query) {
+      searchPlaces(query, limit, currentPage);
+    }
   }, [limit, currentPage, searchPlaces]);
+
+  useEffect(() => {
+    if (!query) {
+      setPlaces([]);
+    } 
+  }, [query]);
 
   const handleSearch = useCallback(() => {
     setCurrentPage(1);
@@ -50,6 +58,7 @@ function App() {
   }, []);
 
   const handleLimitChange = useCallback((newLimit: number) => {
+    setCurrentPage(1);
     setLimit(newLimit);
   }, []);
 
@@ -63,7 +72,7 @@ function App() {
 
       <Divider />
 
-      <PlacesTable places={places} isLoading={isLoading} />
+      <PlacesTable places={places} query={query} isLoading={isLoading} />
 
       <Divider />
 
@@ -81,11 +90,16 @@ function App() {
         <input
           type="number"
           value={limit}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleLimitChange(parseInt(e.target.value))
-          }
-          min="1"
-          max={Math.ceil(totalCount / limit)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const newLimit = parseInt(e.target.value);
+            if (newLimit && newLimit >= 5 && newLimit <= 10) {
+              handleLimitChange(newLimit);
+            } else {
+              alert("Limit should be between 5 and 10");
+            }
+          }}
+          min={5}
+          max={10}
         />
       </div>
     </Layout>

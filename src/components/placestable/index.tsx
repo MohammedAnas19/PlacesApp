@@ -4,9 +4,14 @@ import "./placestable.styles.css";
 const PlacesTable: React.FC<PlacesTablePropsType> = ({
   places,
   isLoading = false,
+  query=''
 }) => {
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (!query) {
+    return <div>Start searching</div>;
   }
 
   if (!places.length) {
