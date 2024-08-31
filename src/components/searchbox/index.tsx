@@ -1,5 +1,6 @@
 import { SearchBoxProps } from "./searchbox.interface";
 import "./searchbox.styles.css";
+
 const SearchBox: React.FC<SearchBoxProps> = ({ value, onChange, onSearch, disabled=false }: any) => {
   return (
     <div className="search-box">

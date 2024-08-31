@@ -1,0 +1,15 @@
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination > div > button {
+  padding: 4px 8px;
+  margin: 0 4px;
+}
+
+.pagination > div > select {
+    padding: 4px 8px;
+    margin: 0 4px;
+  }

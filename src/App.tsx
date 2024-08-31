@@ -3,6 +3,7 @@ import SearchBox from "./components/searchbox";
 import PlacesTable from "./components/placestable";
 import "./App.css";
 import Layout from "./layout";
+import Pagination from "./components/pagination";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -58,9 +59,9 @@ function App() {
             longitude: 1.46722222,
             population: 0,
           },
-          
         ]}
       />
+      <Pagination currentPage={1} onPageChange={() => {}} totalPages={2} />
     </Layout>
   );
 }
