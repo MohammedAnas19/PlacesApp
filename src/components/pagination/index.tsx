@@ -1,20 +1,23 @@
+import { usePagination } from "../../hooks/usePagination";
 import { PaginationPropsType } from "./pagination.interface";
 import "./pagination.styles.css";
 
 const Pagination: React.FC<PaginationPropsType> = ({
   currentPage,
-  totalPages,
+  totalCount,
+  limit,
   onPageChange,
+  onLimitChange,
 }) => {
-  const pages = [...Array(totalPages).keys()].map((n) => n + 1);
+  const pagination=usePagination({totalCount,	pageSize:limit,	siblingCount :10,	currentPage:1})
 
   return (
     <div className="pagination">
       <div>
-        {pages.map((page) => (
+        {pagination?.map((page) => (
           <button
-            key={page}
-            onClick={() => onPageChange(page)}
+            key={`pageNumberId${page}`}
+            onClick={() => onPageChange(parseInt(page+''))}
             style={{
               backgroundColor: page === currentPage ? "#7952b3" : "#fff",
               color: page === currentPage ? "#fff" : "#000",
@@ -25,11 +28,13 @@ const Pagination: React.FC<PaginationPropsType> = ({
         ))}
       </div>
       <div>
-        <select name="" id="">
-          {pages.map((page) => (
-            <option>{page}</option>
-          ))}
-        </select>
+      <input
+        type="number"
+        value={limit}
+        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>onLimitChange(parseInt(e.target.value))}
+        min="1"
+        max={pagination?.length}
+      />
       </div>
     </div>
   );

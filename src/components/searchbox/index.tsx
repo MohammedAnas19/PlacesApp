@@ -7,7 +7,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onChange, onSearch, disabl
       <input
         type="text"
         value={value}
-        onChange={onChange}
+        // onChange={onChange}
         onKeyPress={(e) => e.key === "Enter" && onSearch()}
         placeholder="Search places..."
         disabled={disabled}

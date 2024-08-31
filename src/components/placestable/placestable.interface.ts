@@ -7,6 +7,7 @@ export interface PlaceType {
   country: string;
   countryCode: string;
   region: string;
+  regionWdId:string;
   regionCode: string;
   latitude: number;
   longitude: number;
