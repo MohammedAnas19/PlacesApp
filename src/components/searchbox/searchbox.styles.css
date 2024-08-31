@@ -30,13 +30,16 @@
 .search-box > div {
   position: absolute;
   right: 12px;
-  top: 9px;
-  /* height: 16px; */
-  padding: 1px 2px;
-  border: 1px solid rgb(206, 212, 218);
+  font-size: 12px;
+  border: 1px solid rgb(222, 226, 230);
+  border-radius: 2px;
+  height: 24px;
+  padding: 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-box > div > p {
-  color: brown;
-  font-size: 12px;
+    color: grey;
 }
