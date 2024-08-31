@@ -2,12 +2,13 @@ import { useState } from "react";
 import SearchBox from "./components/searchbox";
 import PlacesTable from "./components/placestable";
 import "./App.css";
+import Layout from "./layout";
 
 function App() {
   const [query, setQuery] = useState("");
   const handleSearch = () => {};
   return (
-    <div>
+    <Layout>
       <SearchBox
         value={query}
         onChange={(e) => setQuery(e.target.value)}
@@ -60,7 +61,7 @@ function App() {
           
         ]}
       />
-    </div>
+    </Layout>
   );
 }
 
