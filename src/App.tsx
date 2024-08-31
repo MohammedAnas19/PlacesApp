@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import SearchBox from "./components/searchbox";
 import PlacesTable from "./components/placestable";
 import "./App.css";
@@ -15,41 +15,46 @@ function App() {
   const [totalCount, setTotalCount] = useState(0);
   const [limit, setLimit] = useState(3);
 
-  const searchPlaces = async (
-    query: string,
-    limit: number,
-    currentPage: number
-  ) => {
+  const searchPlaces = useCallback(async (query: string, limit: number, currentPage: number) => {
     setIsLoading(true);
-    const data = await fetchCities(query, limit, currentPage);
-    setPlaces(data?.data);
-    setTotalCount(data.metadata.totalCount);
-    setIsLoading(false);
-  };
-
-  const handleSearch = () => {
-    setCurrentPage(1);
-    searchPlaces(query, limit, currentPage);
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleLimitChange = (limit: number) => {
-    setLimit(limit);
-  };
+    try {
+      const data = await fetchCities(query, limit, currentPage);
+      setPlaces(data?.data || []);
+      setTotalCount(data?.metadata.totalCount || 0);
+    } catch (error) {
+      console.error("Failed to fetch cities", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     searchPlaces(query, limit, currentPage);
-  }, [limit,currentPage]);
+  }, [ limit, currentPage, searchPlaces]);
+
+  const handleSearch = useCallback(() => {
+    setCurrentPage(1);
+    searchPlaces(query, limit, 1);
+  }, [query, limit, searchPlaces]);
+
+  const handlePageChange = useCallback((newPage: number) => {
+    setCurrentPage(newPage);
+  }, []);
+
+  const handleQueryChange = useCallback((q: string) => {
+    setQuery(q);
+  }, []);
+
+  const handleLimitChange = useCallback((newLimit: number) => {
+    setLimit(newLimit);
+  }, []);
 
   return (
     <Layout>
       <SearchBox
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
         onSearch={handleSearch}
+        onChange={handleQueryChange}
       />
       <PlacesTable places={places} isLoading={isLoading} />
       {places.length > 0 && (

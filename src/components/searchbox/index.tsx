@@ -1,13 +1,18 @@
 import { SearchBoxProps } from "./searchbox.interface";
 import "./searchbox.styles.css";
 
-const SearchBox: React.FC<SearchBoxProps> = ({ value, onChange, onSearch, disabled=false }: any) => {
+const SearchBox: React.FC<SearchBoxProps> = ({
+  value,
+  onChange,
+  onSearch,
+  disabled = false,
+}: any) => {
   return (
     <div className="search-box">
       <input
         type="text"
         value={value}
-        // onChange={onChange}
+        onChange={(e)=>onChange(e.target.value)}
         onKeyPress={(e) => e.key === "Enter" && onSearch()}
         placeholder="Search places..."
         disabled={disabled}

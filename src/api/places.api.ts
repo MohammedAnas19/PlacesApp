@@ -21,13 +21,15 @@ interface ApiResponse {
 export const fetchCities = async (
   query: string,
   limit: number = 3,
-  currentPage:number=1
+  currentPage: number = 1
 ): Promise<ApiResponse> => {
   try {
     const apiKey = import.meta.env.VITE_RAPIDAPI_KEY;
     const apiHost = import.meta.env.VITE_RAPIDAPI_HOST;
     const response = await fetch(
-      `${API_URL}?offset=${limit*currentPage}&namePrefix=${query}&limit=${limit}`,
+      `${API_URL}?offset=${
+        limit * currentPage
+      }&namePrefix=${query}&limit=${limit}`,
       {
         method: "GET",
         headers: {
