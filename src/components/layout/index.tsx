@@ -1,5 +1,7 @@
+import "./layout.styles.css"
+
 function Layout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+  return <div className="layout">{children}</div>;
 }
 
 export default Layout;

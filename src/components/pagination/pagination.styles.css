@@ -1,15 +1,9 @@
 .pagination {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.pagination > div > button {
+.pagination >  button {
   padding: 4px 8px;
-  margin: 0 4px;
 }
-
-.pagination > div > input {
-    padding: 4px 8px;
-    margin: 0 4px;
-  }
